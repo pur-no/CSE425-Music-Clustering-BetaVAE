@@ -23,8 +23,3 @@ Our proposed **Beta-VAE (beta=4)** significantly outperformed both the linear ba
 | Basic VAE | Audio | 0.3172 |
 | **Beta-VAE** | **Audio + Lyrics** | **0.5321** |
 
-## 🚀 How to Run
-1. **Install Dependencies:**
-   ```bash
-
-   pip install -r requirements.txt
