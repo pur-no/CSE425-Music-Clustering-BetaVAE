@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disentangled Music Clustering | Project Showcase</title>
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --dark: #1e1e2e;
+            --light: #f5f6fa;
+            --text-gray: #b2bec3;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        body { background-color: var(--dark); color: var(--light); line-height: 1.6; }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2d3436 0%, #000000 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 4px solid var(--primary);
+        }
+        
+        h1 { font-size: 2.5rem; margin-bottom: 1rem; color: #fff; }
+        .subtitle { font-size: 1.2rem; color: var(--secondary); font-weight: 300; }
+        
+        /* Buttons */
+        .btn-container { margin-top: 2rem; }
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.2s;
+            margin: 0 10px;
+        }
+        .btn:hover { transform: translateY(-3px); background-color: var(--secondary); }
+        .btn-outline { background-color: transparent; border: 2px solid var(--primary); }
+
+        /* Sections */
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        
+        section { margin-bottom: 4rem; }
+        
+        h2 { border-left: 5px solid var(--primary); padding-left: 1rem; margin-bottom: 1.5rem; color: #fff; }
+
+        /* Results Table */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .stat-card {
+            background: #2d3436;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #444;
+        }
+        
+        .stat-number { font-size: 2.5rem; font-weight: bold; color: var(--primary); margin: 0.5rem 0; }
+        .stat-label { color: var(--text-gray); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Images */
+        .visuals-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .visual-box {
+            flex: 1;
+            min-width: 300px;
+            background: #000;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        img { max-width: 100%; height: auto; border-radius: 5px; }
+        .caption { display: block; margin-top: 10px; font-size: 0.9rem; color: var(--text-gray); }
+
+        /* Footer */
+        footer { text-align: center; padding: 2rem; color: #666; border-top: 1px solid #333; margin-top: 4rem; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .visuals-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Multi-Modal Music Clustering</h1>
+        <p class="subtitle">Disentangling Audio and Lyrics with Beta-VAE</p>
+        
+        <div class="btn-container">
+            <a href="https://github.com/pur-no/CSE425-Music-Clustering-BetaVAE" class="btn">View Code on GitHub</a>
+            <a href="#results" class="btn btn-outline">See Results</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <section id="about">
+            <h2>About the Project</h2>
+            <p style="color: var(--text-gray); font-size: 1.1rem;">
+                Traditional music recommendation systems often struggle to distinguish genres that sound similar but have different meanings. 
+                In this project, I built a <strong>Multi-Modal Variational Autoencoder (Beta-VAE)</strong> that fuses 
+                <strong>Mel-Spectrograms</strong> (Audio) and <strong>DistilBERT Embeddings</strong> (Lyrics).
+                <br><br>
+                By enforcing disentanglement in the latent space, the model learned to separate genres with 
+                <strong>67% better accuracy</strong> than standard deep learning baselines.
+            </p>
+        </section>
+
+        <section id="results">
+            <h2>Key Results</h2>
+            <p style="color: var(--text-gray); margin-bottom: 20px;">
+                We compared the proposed Beta-VAE against a Linear Baseline (PCA) and a standard Audio-Only VAE.
+            </p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Baseline (PCA)</div>
+                    <div class="stat-number">0.40</div>
+                    <div class="stat-label">Silhouette Score</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Standard VAE</div>
+                    <div class="stat-number">0.32</div>
+                    <div class="stat-label">Silhouette Score</div>
+                </div>
+                <div class="stat-card" style="border-color: var(--primary);">
+                    <div class="stat-label" style="color: var(--secondary);">Beta-VAE (Ours)</div>
+                    <div class="stat-number">0.53</div>
+                    <div class="stat-label">Silhouette Score</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="visuals">
+            <h2>Latent Space Visualization</h2>
+            <div class="visuals-container">
+                <div class="visual-box">
+                    <img src="results\3_KMeans Clusters.png" alt="Baseline Clusters">
+                    <span class="caption">Standard VAE: Overlapping Clusters</span>
+                </div>
+                <div class="visual-box">
+                    <img src="results\6_Beta-VAE Clusters.png" alt="Beta-VAE Clusters">
+                    <span class="caption">Beta-VAE: Clean, Disentangled Clusters</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="tech-stack">
+            <h2>Tech Stack</h2>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <span class="btn btn-outline" style="padding: 5px 15px; font-size: 0.9rem;">Python</span>
+                <span class="btn btn-outline" style="padding: 5px 15px; font-size: 0.9rem;">PyTorch</span>
+                <span class="btn btn-outline" style="padding: 5px 15px; font-size: 0.9rem;">Librosa</span>
+                <span class="btn btn-outline" style="padding: 5px 15px; font-size: 0.9rem;">HuggingFace Transformers</span>
+                <span class="btn btn-outline" style="padding: 5px 15px; font-size: 0.9rem;">Google Colab</span>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Built for CSE425: Neural Networks @ BRAC University</p>
+    </footer>
+
+</body>
+</html>
